@@ -51,5 +51,5 @@ def funcaola():
 	distancia = 171.5 * duracion
 
 	print("Distancia: {:.2f} cm".format(distancia * 100))
-
-	GPIO.cleanup()
+	return distancia
+	#GPIO.cleanup()

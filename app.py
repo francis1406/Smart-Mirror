@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 @app.route('/teste')
 def Sensor():
-    sensorRasp.funcaola()
+   
     print("Distancia: {:.2f} cm".format(sensorRasp.distancia * 100))
-    teste = sensorRasp.distancia * 100
+    teste = sensorRasp.funcaola()
     return render_template('index.html', hora=teste, data=teste)
 
 
