@@ -1,53 +1,55 @@
-import gpio as GPIO
+import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM) # GPIO.BOARD
+def funcaola():
+	GPIO.setmode(GPIO.BCM) # GPIO.BOARD
 
-trig = 23
-echo = 24
+	trig = 23
+	echo = 24
 
-# ajusta el sensor en el pin `trig` como salida
-GPIO.setup(trig, GPIO.OUT)
-# ajusta el sensor en el pin `echo` como entrada
-GPIO.setup(echo, GPIO.IN)
+	# ajusta el sensor en el pin `trig` como salida
+	GPIO.setup(trig, GPIO.OUT)
+	# ajusta el sensor en el pin `echo` como entrada
+	GPIO.setup(echo, GPIO.IN)
 
-# nos aseguramos que el sensor en `trig` se encuentre apagado
-GPIO.output(trig, GPIO.LOW)
+	# nos aseguramos que el sensor en `trig` se encuentre apagado
+	GPIO.output(trig, GPIO.LOW)
 
-# lanzamos el pulso de disparo a `trig`
-GPIO.output(trig, GPIO.HIGH)
-time.sleep(10 ** -4)
-GPIO.output(trig, GPIO.LOW)
+	# lanzamos el pulso de disparo a `trig`
+	GPIO.output(trig, GPIO.HIGH)
+	time.sleep(10 ** -4)
+	GPIO.output(trig, GPIO.LOW)
 
-inicial = 0
-final = 0
 
-# `echo` se encuentra en LOW
+	inicial = 0
+	final = 0
 
-while GPIO.input(echo) == GPIO.LOW:
-	inicial = time.time()
+	# `echo` se encuentra en LOW
 
-# `echo` se encuentra en HIGH
+	while GPIO.input(echo) == GPIO.LOW:
+		inicial = time.time()
 
-print("Se lanza el pulso en: {}".format(inicial))
+	# `echo` se encuentra en HIGH
 
-while GPIO.input(echo) == GPIO.HIGH:
-	final = time.time()
+	print("Se lanza el pulso en: {}".format(inicial))
 
-# `echo` se encuentra en LOW
+	while GPIO.input(echo) == GPIO.HIGH:
+		final = time.time()
 
-print("Se acaba el pulso en: {}".format(final))
+	# `echo` se encuentra en LOW
 
-# calculamos la duracion del pulso en milisegundos
-duracion = final - inicial
+	print("Se acaba el pulso en: {}".format(final))
 
-# v = d / t
-# d = v * t
-# d = (343000 * t) / 2
-# d = 171500 * t
+	# calculamos la duracion del pulso en milisegundos
+	duracion = final - inicial
 
-distancia = 171.5 * duracion
+	# v = d / t
+	# d = v * t
+	# d = (343000 * t) / 2
+	# d = 171500 * t
 
-print("Distancia: {:.2f} cm".format(distancia * 100))
+	distancia = 171.5 * duracion
 
-GPIO.cleanup()
+	print("Distancia: {:.2f} cm".format(distancia * 100))
+
+	GPIO.cleanup()
