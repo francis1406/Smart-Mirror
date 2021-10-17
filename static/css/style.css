@@ -1,0 +1,12 @@
+h1{
+    font-size: 6em;
+}
+h6, p{
+    color: white;
+}
+#txt{
+    display: inline-block;
+}
+#img{
+    display: inline-block;
+}
