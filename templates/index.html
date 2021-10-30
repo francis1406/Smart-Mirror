@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
     <link href="../static/css/style.css" rel="stylesheet">
 
+    <!--Atualiza data e hora-->
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script type="text/javascript">
+        jQuery(window).load(function ($) {
+            atualizaRelogio();
+        });
+    </script>
+
 </head>
 <body style="background-color: #151515">
 <div class="container w-100 h-25">
@@ -20,9 +28,10 @@
                         <div class="col-md-12">
                             <div class="card text-white bg-dark mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title">Serra - ES</h5>
-                                    <img id="img" src="https://image.flaticon.com/icons/png/512/430/430556.png" alt="twbs" width="80" height="80">
-                                    <h2 id="txt" class="card-text">30ºC</h2>
+                                    <div id="cont_3d6ef30be3dca873637dca9f69531a9e">
+                                        <script type="text/javascript" async
+                                                src="https://www.tempo.com/wid_loader/3d6ef30be3dca873637dca9f69531a9e"></script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -37,8 +46,8 @@
                         <div class="col-md-12 align-items-start">
                             <div class="card text-white bg-dark mb-3">
                                 <div class="card-body">
-                                    <h6 class="card-text">{{ data }}</h6>
-                                    <h1 id="hour">{{ hora }}</h1>
+                                    <h6 id="data" class="card-text"></h6>
+                                    <h1 id="hora"></h1>
                                 </div>
                             </div>
                         </div>
@@ -48,14 +57,17 @@
         </div>
     </div>
     <!--teste templete spotify-->
-    <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3"
-            width="97%" height="250px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0FOF1IUWK1W?theme=0"
+            width="100%" height="200" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
 
     <!--teste emaillist group-->
     <div class="list-group" style="margin-top: 15%">
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true"
            style="background-color: transparent">
-            <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="twbs" style="margin-right: 10px">
+            <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r2.png" alt="twbs"
+                 style="margin-right: 10px">
         </a>
 
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true"
@@ -108,4 +120,44 @@
             crossorigin="anonymous"></script>
 </div>
 </body>
+
+<!--script para hora e data-->
+<script>
+    function atualizaRelogio() {
+        var momentoAtual = new Date();
+
+        var vhora = momentoAtual.getHours();
+        var vminuto = momentoAtual.getMinutes();
+        var vsegundo = momentoAtual.getSeconds();
+
+        var vdia = momentoAtual.getDate();
+        var vmes = momentoAtual.getMonth() + 1;
+        var vano = momentoAtual.getFullYear();
+
+        if (vdia < 10) {
+            vdia = "0" + vdia;
+        }
+        if (vmes < 10) {
+            vmes = "0" + vmes;
+        }
+        if (vhora < 10) {
+            vhora = "0" + vhora;
+        }
+        if (vminuto < 10) {
+            vminuto = "0" + vminuto;
+        }
+        if (vsegundo < 10) {
+            vsegundo = "0" + vsegundo;
+        }
+
+        dataFormat = vdia + "/" + vmes + "/" + vano;
+        horaFormat = vhora + ":" + vminuto + ":" + vsegundo;
+
+        document.getElementById("data").innerHTML = dataFormat;
+        document.getElementById("hora").innerHTML = horaFormat;
+
+        setTimeout("atualizaRelogio()", 1000);
+    }
+</script>
+
 </html>
